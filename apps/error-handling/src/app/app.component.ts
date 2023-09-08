@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { errorLogger } from '@error-handling/error-logger';
 
 @Component({
   selector: 'error-handling-root',
@@ -7,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'error-handling';
+
+  constructor() {
+    errorLogger();
+  }
 }
