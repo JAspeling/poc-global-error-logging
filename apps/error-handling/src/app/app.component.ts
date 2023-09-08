@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { errorLogger } from '@error-handling/error-logger';
+import { someLib } from '@error-handling/some-lib';
 
 @Component({
   selector: 'error-handling-root',
@@ -11,5 +12,7 @@ export class AppComponent {
 
   constructor() {
     errorLogger();
+
+    someLib();
   }
 }

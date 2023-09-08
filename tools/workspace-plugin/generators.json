@@ -1,0 +1,9 @@
+{
+  "generators": {
+    "cache-buster": {
+      "factory": "./src/generators/cache-buster/generator",
+      "schema": "./src/generators/cache-buster/schema.json",
+      "description": "cache-buster generator"
+    }
+  }
+}

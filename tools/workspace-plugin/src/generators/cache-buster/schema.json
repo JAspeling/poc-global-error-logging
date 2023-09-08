@@ -1,0 +1,11 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "CacheBuster",
+  "properties": {
+    "distPath": {
+      "type": "string",
+      "description": "The path to the dist file of the standalone script",
+    }
+  },
+  "required": ["distPath"]
+}

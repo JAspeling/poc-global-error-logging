@@ -1,0 +1,29 @@
+{
+  "name": "error-logger",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/error-logger/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/error-logger",
+        "main": "libs/error-logger/src/index.ts",
+        "tsConfig": "libs/error-logger/tsconfig.lib.json",
+        "assets": ["libs/error-logger/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/error-logger/**/*.ts",
+          "libs/error-logger/package.json"
+        ]
+      }
+    }
+  },
+  "tags": []
+}
