@@ -17,7 +17,12 @@
         "tsConfig": "apps/error-handling/tsconfig.app.json",
         "assets": [
           "apps/error-handling/src/favicon.ico",
-          "apps/error-handling/src/assets"
+          "apps/error-handling/src/assets",
+          {
+            "glob": "**/error-logger.js",
+            "input": "libs/error-logger/dist/",
+            "output": "./assets"
+          }
         ],
         "styles": ["apps/error-handling/src/styles.scss"],
         "scripts": []

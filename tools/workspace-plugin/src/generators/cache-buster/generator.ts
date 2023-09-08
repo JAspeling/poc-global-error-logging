@@ -10,6 +10,7 @@ import { output } from '../utils';
  * View the README for more info
  */
 export default async function (tree: Tree, schema: Schema) {
+  console.log('EXECUTING CACHE-BUSTING GENERATOR');
   const indexFiles = await fg(['apps/**/src/index.html']);
 
   // loop through each index file in the apps folder

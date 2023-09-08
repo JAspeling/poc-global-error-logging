@@ -4,14 +4,30 @@
   "sourceRoot": "libs/error-logger/src",
   "projectType": "library",
   "targets": {
+    "prebuild": {
+      "executor": "@nx/webpack:webpack",
+      "options": {
+        "main": "libs/error-logger/src/lib/error-logger.ts",
+        "outputPath": "libs/error-logger/dist",
+        "outputFileName": "error-logger.js",
+        "tsConfig": "libs/error-logger/tsconfig.lib.json",
+        "sourceMap": false,
+        "target": "web",
+        "compiler": "tsc",
+        "runtimeChunk": false,
+        "optimization": {
+          "scripts": true
+        }
+      }
+    },
     "build": {
-      "executor": "@nx/js:tsc",
+      "executor": "nx:run-commands",
+      "dependsOn": ["prebuild"],
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/libs/error-logger",
-        "main": "libs/error-logger/src/index.ts",
-        "tsConfig": "libs/error-logger/tsconfig.lib.json",
-        "assets": ["libs/error-logger/*.md"]
+        "commands": [
+          "nx g @error-handling/workspace-plugin:cache-buster --distPath=libs/"
+        ]
       }
     },
     "lint": {
