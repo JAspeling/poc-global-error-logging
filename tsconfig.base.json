@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@error-handling/error-logger": ["libs/error-logger/src/index.ts"]
+      "@error-handling/error-logger": ["libs/error-logger/src/index.ts"],
+      "@error-handling/some-lib": ["libs/some-lib/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
