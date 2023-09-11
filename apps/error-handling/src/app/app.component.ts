@@ -11,5 +11,12 @@ export class AppComponent {
 
   constructor() {
     someLib();
+    // console.log('[flow] AppComponent constructor, throwing error...')
+    // throw new Error('Error from AppComponent constructor');
+  }
+
+  ngOnInit() {
+    console.log('[flow] AppComponent ngOnInit, throwing error...');
+    throw new Error('Error from AppComponent ngOnInit');
   }
 }

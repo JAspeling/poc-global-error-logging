@@ -11,10 +11,8 @@ import { output } from '../utils';
  * View the README for more info
  */
 export default async function (tree: Tree, schema: Schema) {
-  console.log('EXECUTING CACHE-BUSTING GENERATOR');
   const indexFiles = await fg.glob(['apps/**/src/index.html']);
 
-  console.log('indexFiles file(s) found: ', indexFiles.length)
   // loop through each index file in the apps folder
   indexFiles.forEach(indexFilePath => {
     if (!tree.exists(indexFilePath)) {

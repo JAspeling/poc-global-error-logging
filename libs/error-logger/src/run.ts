@@ -1,8 +1,8 @@
 // Maybe wait for nativeBridge to be attached to window before running?
 
-import { run } from './lib/error-logger';
+import { run, stop } from './lib/error-logger';
 
-console.log('[error-logger] run (Attaching to DOMContentLoaded)');
+console.log('[error-logger] run (Attaching to events)');
 /**
  * By default, Angular bootstraps automatically upon `DOMContentLoaded`.
  * Therefor, we can't use `DOMContentLoaded` to attach to the window event.
@@ -15,3 +15,8 @@ console.log('[error-logger] run (Attaching to DOMContentLoaded)');
  * attribute to an HTML element, and then manually bootstrap it after your script has run.
  */
 run();
+
+window.addEventListener('appBootstrapCompleted', () => {
+  console.log('[error-logger] appBootstrapCompleted event fired');
+  stop();
+})

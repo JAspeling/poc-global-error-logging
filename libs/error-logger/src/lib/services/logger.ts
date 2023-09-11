@@ -1,4 +1,7 @@
-type Context = Record<string, string>;
+// interface dictionary
+type Context = {
+  [key: string]: any
+}
 
 function logBrowser(applicationLog: any) {
   const logMessage = {
@@ -7,13 +10,20 @@ function logBrowser(applicationLog: any) {
   };
 
   // use xmlHttpRequest because every browser supports it
+  // This will be sent to the rabobank log collector service.
+  console.log('%c[logger browser]%c',
+    'background-color: blue',
+    'background-color: reset',
+    logMessage
+  );
+
   const xmlhttp = new XMLHttpRequest();
   xmlhttp.open('POST', 'https://log.rabobank.nl/messages');
   xmlhttp.setRequestHeader('Content-Type', 'text/plain');
   xmlhttp.send(JSON.stringify(logMessage));
 }
 
-function getContext(context: Context): Context {
+function getContext(context?: Context): Context {
   const defaultContext = {};
 
   return Object.assign({}, defaultContext, context);
@@ -22,8 +32,8 @@ function getContext(context: Context): Context {
 
 function log(
   message: string,
-  context: Context,
-  level: any
+  context?: Context,
+  level: any = 'INFO'
 ) {
   const _context = getContext(context);
 
@@ -41,4 +51,12 @@ function log(
   } catch (e) {
     console.error(e);
   }
+}
+
+export function logError(message: string, context?: Context) {
+  log(message, context, 'ERROR');
+}
+
+export function logInfo(message: string, context?: Context) {
+  log(message, context, 'INFO');
 }
