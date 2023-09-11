@@ -2,13 +2,24 @@ import { logError } from './services/logger';
 
 const original_error_handler = window.onerror;
 
+
 export function run() {
   console.log('[error-logger] run (Entry point for the error-logger)');
   attachToWindowEvent();
-
-  console.log(`[error-logger] window.onerror fn ${window.onerror ? 'already registered' : 'not registered'}`);
+  attachToWindowUnhandledRejectionEvent();
   setErrorFn();
 }
+
+function attachToWindowUnhandledRejectionEvent(): void {
+  console.log('[error-logger] attachToWindowUnhandledRejectionEvent');
+  window.addEventListener('unhandledrejection', eventUnhandledRejectionFn);
+}
+
+function eventUnhandledRejectionFn(event: PromiseRejectionEvent) {
+  console.log('[error-logger] window.unhandledrejection fired');
+  logError(event.reason, { source: 'unhandledrejection', error: event.reason });
+}
+
 
 function eventErrorFn({ filename, lineno, colno, error, message }: ErrorEvent) {
   console.log('[error-logger] window.error fired');
@@ -42,8 +53,8 @@ function windowOnErrorFn(message: string | Event, source: string | undefined, li
  * It does not register the function as an event handler.
  */
 function setErrorFn() {
+  console.log(`[error-logger] window.onerror fn ${window.onerror ? 'already registered' : 'not registered'}`);
   console.log('[error-logger] registering window.onerror');
-  console.log()
 
   window.onerror = windowOnErrorFn;
 }
@@ -57,4 +68,5 @@ export function stop() {
   console.log('[error-logger] Stop listening and cleaning up...');
   restoreOriginalErrorFn();
   window.removeEventListener('error', eventErrorFn);
+  window.removeEventListener('unhandledrejection', eventUnhandledRejectionFn);
 }

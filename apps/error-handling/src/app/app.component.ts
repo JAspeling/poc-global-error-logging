@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { someLib } from '@error-handling/some-lib';
+import { fetchSomeData, someLib } from '@error-handling/some-lib';
 
 @Component({
   selector: 'error-handling-root',
@@ -10,7 +10,7 @@ export class AppComponent {
   title = 'error-handling';
 
   constructor() {
-    someLib();
+    fetchSomeData();
     // console.log('[flow] AppComponent constructor, throwing error...')
     // throw new Error('Error from AppComponent constructor');
   }
