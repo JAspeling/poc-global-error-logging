@@ -22,5 +22,11 @@
       ]
     }
   },
+  "ts-node": {
+    "compilerOptions": {
+      "module": "commonjs",
+      "noUnusedParameters": true
+    }
+  },
   "exclude": ["node_modules", "tmp"]
 }

@@ -1,12 +1,11 @@
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { Tree, readProjectConfiguration } from '@nx/devkit';
-
-import { cacheBusterGenerator } from './generator';
+import cacheBusterGenerator from './generator';
 import { CacheBusterGeneratorSchema } from './schema';
 
 describe('cache-buster generator', () => {
   let tree: Tree;
-  const options: CacheBusterGeneratorSchema = { name: 'test' };
+  const options: CacheBusterGeneratorSchema = { distPath: 'error-logger' };
 
   beforeEach(() => {
     tree = createTreeWithEmptyWorkspace();
@@ -14,7 +13,7 @@ describe('cache-buster generator', () => {
 
   it('should run successfully', async () => {
     await cacheBusterGenerator(tree, options);
-    const config = readProjectConfiguration(tree, 'test');
+    const config = readProjectConfiguration(tree, 'error-logger');
     expect(config).toBeDefined();
   });
 });

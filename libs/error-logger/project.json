@@ -7,7 +7,7 @@
     "prebuild": {
       "executor": "@nx/webpack:webpack",
       "options": {
-        "main": "libs/error-logger/src/lib/error-logger.ts",
+        "main": "libs/error-logger/src/run.ts",
         "outputPath": "libs/error-logger/dist",
         "outputFileName": "error-logger.js",
         "tsConfig": "libs/error-logger/tsconfig.lib.json",
@@ -26,7 +26,7 @@
       "outputs": ["{options.outputPath}"],
       "options": {
         "commands": [
-          "nx g @error-handling/workspace-plugin:cache-buster --distPath=libs/"
+          "nx g @error-handling/workspace-plugin:cache-buster --distPath=libs/error-logger/dist/error-logger.js"
         ]
       }
     },

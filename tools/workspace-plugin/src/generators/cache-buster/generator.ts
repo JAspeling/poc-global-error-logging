@@ -1,3 +1,4 @@
+import 'setimmediate';
 import { Tree } from '@nx/devkit';
 import * as fg from 'fast-glob';
 import { CacheBusterGeneratorSchema as Schema } from './schema';
@@ -11,23 +12,27 @@ import { output } from '../utils';
  */
 export default async function (tree: Tree, schema: Schema) {
   console.log('EXECUTING CACHE-BUSTING GENERATOR');
-  const indexFiles = await fg(['apps/**/src/index.html']);
+  const indexFiles = await fg.glob(['apps/**/src/index.html']);
 
+  console.log('indexFiles file(s) found: ', indexFiles.length)
   // loop through each index file in the apps folder
   indexFiles.forEach(indexFilePath => {
     if (!tree.exists(indexFilePath)) {
+      console.log('!tree.exists(indexFilePath)');
       return;
     }
 
     const indexFileContents = tree.read(indexFilePath);
 
     if (!indexFileContents) {
+      console.log('!indexFileContents');
       return;
     }
 
     const scriptFileContents = tree.read(schema.distPath);
 
     if (!scriptFileContents) {
+      console.log('!scriptFileContents');
       return;
     }
 
@@ -39,6 +44,7 @@ export default async function (tree: Tree, schema: Schema) {
         .toString()
         .match(new RegExp(`<script.*${scriptFileName}`, 's'))
     ) {
+      console.log('!indexFileContents.toString().match', scriptFileName, `<script.*${scriptFileName}`);
       return;
     }
 
